@@ -16,5 +16,4 @@ ContactItem.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   number: PropTypes.string,
-  delContact: PropTypes.func,
 };
