@@ -1,9 +1,12 @@
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useContacts } from '../../redux/contactsSlice';
+import { useFilter } from '../../redux/filterSlice';
+
 import ContactItem from './ContactItem/ContactItem';
 
 export default function ContactList() {
-  const { contacts, filter } = useSelector((state) => state);
+  const { contacts, delContact } = useContacts();
+  const { filter } = useFilter();
+
   const filterContacts = () => {
     if (filter === '') {
       return contacts;
@@ -12,12 +15,14 @@ export default function ContactList() {
       name.toLowerCase().includes(filter.toLowerCase())
     );
   };
+
   return (
     <>
       <h2>Contacts</h2>
       <ul>
         {filterContacts(contacts).map((e) => (
           <ContactItem
+            delContact={delContact}
             key={e.id}
             id={e.id}
             number={e.number}
@@ -28,7 +33,3 @@ export default function ContactList() {
     </>
   );
 }
-
-ContactList.propTypes = {
-  onFilterContacts: PropTypes.array,
-};

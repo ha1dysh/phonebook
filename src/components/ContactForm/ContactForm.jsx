@@ -1,15 +1,12 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-
-import { addContact } from '../../redux/contactsSlice';
+import { useContacts } from '../../redux/contactsSlice';
 
 import InputName from './InputName/InputName';
 import InputPhone from './InputPhone/InputPhone';
 
-export default function ContactForm({ addContact: add }) {
-  const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts);
+export default function ContactForm() {
+  const { contacts, addContact } = useContacts();
 
   const {
     register,
@@ -26,8 +23,7 @@ export default function ContactForm({ addContact: add }) {
       return;
     }
 
-    e.id = nanoid(5);
-    dispatch(addContact(e));
+    addContact({ ...e, id: nanoid(5) });
 
     reset();
   };
