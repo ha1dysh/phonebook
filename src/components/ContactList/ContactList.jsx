@@ -1,8 +1,6 @@
 import { useContacts } from '../../redux/contactsSlice';
 import { useFilter } from '../../redux/filterSlice';
 
-import ContactItem from './ContactItem/ContactItem';
-
 export default function ContactList() {
   const { contacts, delContact } = useContacts();
   const { filter } = useFilter();
@@ -21,13 +19,10 @@ export default function ContactList() {
       <h2>Contacts</h2>
       <ul>
         {filterContacts(contacts).map((e) => (
-          <ContactItem
-            delContact={delContact}
-            key={e.id}
-            id={e.id}
-            number={e.number}
-            name={e.name}
-          />
+          <li key={e.id}>
+            {e.name}: {e.number}
+            <button onClick={() => delContact(e.id)}>Delete</button>
+          </li>
         ))}
       </ul>
     </>
