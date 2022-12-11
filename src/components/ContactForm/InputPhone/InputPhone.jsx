@@ -1,11 +1,11 @@
 export default function InputPhone({ register, errors }) {
   return (
     <>
-      {' '}
       <label htmlFor="number">
         <p>Number</p>
         <input
           type="tel"
+          autoComplete="off"
           {...register('number', {
             required: true,
             pattern:

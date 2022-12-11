@@ -1,12 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { nanoid } from 'nanoid';
-import { useContacts } from '../../redux/contactsSlice';
+
+import {
+  useGetContactsQuery,
+  useAddContactMutation,
+} from '../../redux/contactsSlice';
 
 import InputName from './InputName/InputName';
 import InputPhone from './InputPhone/InputPhone';
 
 export default function ContactForm() {
-  const { contacts, addContact } = useContacts();
+  const { contacts = [] } = useGetContactsQuery();
+  const [addContact] = useAddContactMutation();
 
   const {
     register,

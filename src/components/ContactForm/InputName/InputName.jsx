@@ -5,8 +5,10 @@ export default function InputName({ register, errors }) {
         <p>Name</p>
         <input
           type="text"
+          autoComplete="off"
           {...register('name', {
             required: true,
+
             pattern:
               /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
           })}
