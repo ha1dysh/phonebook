@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import { nanoid } from 'nanoid';
 
 import {
   useGetContactsQuery,
@@ -10,8 +9,10 @@ import InputName from './InputName/InputName';
 import InputPhone from './InputPhone/InputPhone';
 
 export default function ContactForm() {
-  const { contacts = [] } = useGetContactsQuery();
+  const { data: contacts = [] } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
+
+  console.log(contacts);
 
   const {
     register,
@@ -28,7 +29,7 @@ export default function ContactForm() {
       return;
     }
 
-    addContact({ ...e, id: nanoid(5) });
+    addContact(e);
 
     reset();
   };
